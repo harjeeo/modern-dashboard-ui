@@ -7,6 +7,7 @@ import {
   DashboardSquare01Icon,
   ArrowDown01Icon,
 } from "@hugeicons/core-free-icons";
+import TabCurve from "./TabCurve";
 
 const TABS = [
   { key: "learning", label: "Learning Plan", icon: Mortarboard02Icon, hasLabel: true },
@@ -15,26 +16,6 @@ const TABS = [
   { key: "mail", icon: Mail01Icon, hasLabel: false },
   { key: "grid", icon: DashboardSquare01Icon, hasLabel: false },
 ];
-
-const TAB_H = 20; // px, radius of the concave connector / tab corner
-
-function Notch({ side }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute bottom-0"
-      style={{
-        [side]: -TAB_H,
-        width: TAB_H,
-        height: TAB_H,
-        background:
-          side === "left"
-            ? `radial-gradient(circle at top left, transparent ${TAB_H}px, var(--panel-bg) ${TAB_H}px)`
-            : `radial-gradient(circle at top right, transparent ${TAB_H}px, var(--panel-bg) ${TAB_H}px)`,
-      }}
-    />
-  );
-}
 
 export default function Navbar({ active, onChange }) {
   return (
@@ -50,21 +31,13 @@ export default function Navbar({ active, onChange }) {
                 key={tab.key}
                 onClick={() => onChange(tab.key)}
                 className={[
-                  "relative flex items-center gap-2 px-5 py-2.5 text-[15px] font-medium transition-colors",
-                  isActive
-                    ? "rounded-t-full rounded-b-none text-black"
-                    : "rounded-full text-white/70 hover:text-white",
+                  "relative flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-medium transition-colors",
+                  isActive ? "text-white" : "text-white/70 hover:text-white",
                 ].join(" ")}
-                style={isActive ? { background: "var(--panel-bg)" } : undefined}
               >
                 <HugeiconsIcon icon={tab.icon} size={19} strokeWidth={1.8} />
                 {tab.hasLabel && <span>{tab.label}</span>}
-                {isActive && (
-                  <>
-                    <Notch side="left" />
-                    <Notch side="right" />
-                  </>
-                )}
+                {isActive && <TabCurve />}
               </button>
             );
           })}
