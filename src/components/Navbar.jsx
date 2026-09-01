@@ -50,10 +50,10 @@ export default function Navbar({ active, onChange }) {
                 key={tab.key}
                 onClick={() => onChange(tab.key)}
                 className={[
-                  "relative flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-medium transition-colors",
+                  "relative flex items-center gap-2 px-5 py-2.5 text-[15px] font-medium transition-colors",
                   isActive
-                    ? "text-black"
-                    : "text-white/70 hover:text-white",
+                    ? "rounded-t-full rounded-b-none text-black"
+                    : "rounded-full text-white/70 hover:text-white",
                 ].join(" ")}
                 style={isActive ? { background: "var(--panel-bg)" } : undefined}
               >
